@@ -1,7 +1,10 @@
 package com.ao.tcrmeshes;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import org.slf4j.Logger;
 import yesman.epicfight.api.client.model.Meshes;
 import yesman.epicfight.client.mesh.HumanoidMesh;
 
@@ -9,6 +12,7 @@ import yesman.epicfight.client.mesh.HumanoidMesh;
 public class TCRMeshes {
 
     public static final String MOD_ID = "tcrmeshes";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     // Mesh Accessors
     public static final Meshes.MeshAccessor<HumanoidMesh> IGNIS_HUMANOID =
@@ -61,6 +65,10 @@ public class TCRMeshes {
             ResourceLocation.fromNamespaceAndPath(TCRMeshes.MOD_ID, "textures/entity/ancient_remain_humanoid.png");
 
     public TCRMeshes() {
+        if(!ModList.get().isLoaded("tcr_bosses")) {
+            LOGGER.error("[TCRMeshes] : This mod is exclusively for 'the Casket of Reveries' modpack. If you wish to use this mod or models, please request authorization from P1nero (gaylordfocker@foxmail.com).");
+            System.exit(0);
+        }
 
     }
 }
